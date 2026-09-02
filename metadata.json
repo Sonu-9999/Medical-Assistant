@@ -1,0 +1,6 @@
+{
+  "name": "MediSummarize",
+  "description": "Medical document management and AI report summarization web application with patient and doctor portals.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
