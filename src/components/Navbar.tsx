@@ -42,9 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="font-bold text-lg text-slate-800 tracking-tight font-display">
                 Medi<span className="text-blue-600">Summarize</span>
               </span>
-              <span className="hidden sm:inline-block px-2.5 py-0.5 text-[11px] font-semibold bg-blue-50/70 text-blue-600 border border-blue-200/60 rounded-full backdrop-blur-xs">
-                AI Clinical Records
-              </span>
+              
             </div>
             <p className="text-[11px] text-slate-500 hidden md:block">
               Intelligent Document Management & Grounded Medical Summarization
