@@ -445,7 +445,7 @@ export const DoctorPortal: React.FC<DoctorPortalProps> = ({
           /* Dashboard & Patient Directory View */
           <>
             {/* Top Metric Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               <div className="glass-card bg-white/60 backdrop-blur-md border border-white/60 p-4 sm:p-5 rounded-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.06)]">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -485,18 +485,7 @@ export const DoctorPortal: React.FC<DoctorPortalProps> = ({
                 <p className="text-[11px] text-rose-600/80 mt-0.5">Elevated test results</p>
               </div>
 
-              <div className="glass-card bg-white/60 backdrop-blur-md border border-white/60 p-4 sm:p-5 rounded-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.06)]">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                    AI Accuracy
-                  </span>
-                  <div className="w-9 h-9 rounded-xl bg-emerald-50/80 border border-emerald-100 text-emerald-600 flex items-center justify-center shadow-2xs">
-                    <Shield className="w-4 h-4" />
-                  </div>
-                </div>
-                <p className="text-2xl font-bold text-emerald-700 font-display">100%</p>
-                <p className="text-[11px] text-emerald-600/80 mt-0.5">Strict non-hallucinatory</p>
-              </div>
+              
             </div>
 
             {/* Patient Search & Filter Bar */}
