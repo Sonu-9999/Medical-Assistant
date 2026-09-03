@@ -49,18 +49,13 @@ export const PatientPortal: React.FC<PatientPortalProps> = ({
   const [isUploadingReport, setIsUploadingReport] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadStage, setUploadStage] = useState('');
+  const [aadhaarDigits, setAadhaarDigits] = useState('');
 
   // Format Aadhaar masking helper
   const handleAadhaarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value.replace(/\D/g, '').slice(0, 12);
-    if (raw.length <= 8) {
-      setAadhaarInput(raw);
-    } else {
-      // Mask first 8 digits as XXXX-XXXX-
-      const lastDigits = raw.slice(8);
-      setAadhaarInput(`XXXX-XXXX-${lastDigits}`);
-    }
-  };
+  const digits = e.target.value.replace(/\D/g, '').slice(0, 12);
+  setAadhaarInput(digits);
+};
 
   // Register Patient Form Handler
   const handleRegisterPatient = async (e: React.FormEvent) => {
@@ -83,6 +78,14 @@ export const PatientPortal: React.FC<PatientPortalProps> = ({
 
     try {
       const formData = new FormData();
+      if (aadhaarInput.length !== 12) {
+          onShowToast(
+            'error',
+            'Invalid Aadhaar',
+            'Please enter a valid 12-digit Aadhaar number.'
+          );
+          return;
+        }
       formData.append('name', name.trim());
       formData.append('age', age);
       formData.append('gender', gender);
@@ -287,7 +290,11 @@ export const PatientPortal: React.FC<PatientPortalProps> = ({
                     id="patient-aadhaar-input"
                     value={aadhaarInput}
                     onChange={handleAadhaarChange}
-                    placeholder="XXXX-XXXX-1234"
+                    inputMode="numeric"
+                    autoComplete="off"
+                    maxLength={12}
+                    placeholder="Enter 12-digit Aadhaar"
+                    aria-label="Aadhaar number"
                     className="w-full pl-9 pr-3.5 py-2.5 glass-input bg-white/60 backdrop-blur-xs border border-white/80 rounded-xl text-xs sm:text-sm font-mono text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition shadow-2xs"
                   />
                 </div>
@@ -339,8 +346,7 @@ export const PatientPortal: React.FC<PatientPortalProps> = ({
               onAudioRecorded={(blob) => setRecordedAudioBlob(blob)}
               onTranscriptionUpdate={(text) => {
                 setAudioTranscript(text);
-                // Also append or set problem description so patient can review
-                setProblemDescription((prev) => (prev ? `${prev} ${text}` : text));
+                setProblemDescription(text);
               }}
               initialTranscript={audioTranscript}
             />
