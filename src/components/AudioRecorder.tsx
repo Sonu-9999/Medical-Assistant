@@ -57,9 +57,13 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
   }, []);
 
   useEffect(() => {
-    setTranscription(initialTranscript || '');
-    finalTranscriptRef.current = initialTranscript || '';
-  }, [initialTranscript]);
+    // FIX: Only sync the initial transcript when NOT recording.
+    // If we update this while recording, it creates an infinite duplication loop.
+    if (!isRecording) {
+      setTranscription(initialTranscript || '');
+      finalTranscriptRef.current = initialTranscript || '';
+    }
+  }, [initialTranscript, isRecording]);
 
   useEffect(() => {
     return () => {
